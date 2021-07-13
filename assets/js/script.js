@@ -234,9 +234,29 @@ document.querySelector("select[name='task-type']").value = taskType;
 document.querySelector("#save-task").textContent = "Save Task";
 formEl.setAttribute("data-task-id", taskId);
 
+// save function
 var saveTasks = function() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
-}
+};
+
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
 
+};
+
+// load function 
+var loadTasks = function() {
+  savedTasks = localStorage.getItem("tasks");
+
+  if (!savedTasks) {
+    tasks = [];
+    return false;
+  }
+  console.log("Saved tasks found!");
+  savedTasks = JSON.parse(savedtasks);
+ // loop through savedTasks array
+for (var i = 0; i < savedTasks.length; i++) {
+  // pass each task object into the `createTaskEl()` function
+  createTaskEl(savedTasks[i]);
 }
+};
+
